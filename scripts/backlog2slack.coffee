@@ -72,37 +72,39 @@ module.exports = (robot) ->
 
       if body.content.changes?
         for change in body.content.changes
+          title = null
+          value = "#{decorate(change.old_value)} => #{decorate(change.new_value)}"
           switch change.field
             # 詳細
             when "description"
               title = "詳細変更"
-              value = change.new_value
             # 担当者
             when "assigner"
               title = "担当者変更"
-              value = "#{decorate(change.old_value)} => #{decorate(change.new_value)}"
+            # 添付ファイル変更
+            when "attachment"
+              title = "添付ファイル変更"
+            # マイルストーン
+            when "milestone"
+              title = "マイルストーン変更"
+            # 期限日
+            when "limitDate"
+              title = "期限日変更"
             # ステータス
             when "status"
               title = "ステータス変更"
               value = "#{decorate(status[change.old_value])} => #{decorate(status[change.new_value])}"
-            # マイルストーン
-            when "milestone"
-              title = "マイルストーン変更"
-              value = "#{decorate(change.old_value)} => #{decorate(change.new_value)}"
-            # 期限日
-            when "limitDate"
-              title = "期限日変更"
-              value = "#{decorate(change.old_value)} => #{decorate(change.new_value)}"
             # 完了理由
             when "resolution"
               title = "完了理由変更"
               value = "#{decorate(resolution[change.old_value])} => #{decorate(resolution[change.new_value])}"
 
-          fields.push(
-            title: title
-            value: value
-            short: true
-          )
+          if title?
+            fields.push(
+              title: title
+              value: value
+              short: true
+            )
 
       # 添付ファイル
       if body.content.attachments?
