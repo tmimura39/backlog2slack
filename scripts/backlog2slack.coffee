@@ -78,9 +78,16 @@ module.exports = (robot) ->
         when 1
           label = "課題追加"
           color = query.warning_color || config.warning_color
+          assigner = (body.notifications.filter (n) -> n.reason == 1)[0]
           fields.push(
-            title: "詳細"
-            value: body.content.description
+            {
+              title: "担当"
+              value: decorate(assigner?.name)
+            },
+            {
+              title: "詳細"
+              value: body.content.description
+            }
           )
         when 2 then label = "課題更新"
         when 3 then label = "コメント追加"
@@ -144,7 +151,7 @@ module.exports = (robot) ->
           content:
             fallback: "#{label}: [#{body.content.summary}] by #{body.createdUser.name}"
             color: color
-            title: body.content.summary
+            title: "[#{body.project.projectKey}-#{body.content.key_id}] #{body.content.summary}"
             title_link: "#{backlogUrl}view/#{body.project.projectKey}-#{body.content.key_id}"
             fields: fields
 
