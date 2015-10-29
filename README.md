@@ -62,13 +62,20 @@ Hubotディレクトリで以下のコマンドを実行
 
 ### オプション：Hubot通知の色の指定
 
+|Action|Type|defaultColor|
+|:-----|:--:|:----------:|
+|課題の追加|warning|オレンジ|
+|コメント追加|good|Green|
+|お知らせ追加|good|Green|
+|課題の更新|good|Green|
+
 - Getパラメータでの指定(優先)  
 `http:example.com:8080/backlog2slack?good_color=000000`  
-`http:example.com:8080/backlog2slack?warning_color=ff0000&danger_color=f0f`  
+`http:example.com:8080/backlog2slack?good_color=ff0000&warning_color=f0f`  
 ...etc
 
 - 環境変数での指定  
 `export HUBOT_BACKLOG2SLACK_GOOD_COLOR = "000"`  
-`export HUBOT_BACKLOG2SLACK_INFOMATION_COLOR = "ffff00"`
+`export HUBOT_BACKLOG2SLACK_WARNING_COLOR = "ffff00"`
 
 ※ 色に"#"を含めない
