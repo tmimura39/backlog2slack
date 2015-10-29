@@ -142,12 +142,13 @@ module.exports = (robot) ->
           username: "#{label}: [#{body.project.name}]"
           icon_url: "https://raw.githubusercontent.com/mito5525/backlog2slack/master/icon/backlog.png"
           content:
-            pretext: "To:#{notifications}"
             fallback: "#{label}: [#{body.content.summary}] by #{body.createdUser.name}"
             color: color
             title: body.content.summary
             title_link: "#{backlogUrl}view/#{body.project.projectKey}-#{body.content.key_id}"
             fields: fields
+
+        msg.content.pretext = "To: #{notifications}" unless notifications == ""
 
         robot.emit 'slack-attachment', msg
         res.end "OK"
