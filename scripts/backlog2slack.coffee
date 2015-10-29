@@ -148,7 +148,7 @@ module.exports = (robot) ->
             title_link: "#{backlogUrl}view/#{body.project.projectKey}-#{body.content.key_id}"
             fields: fields
 
-        msg.content.pretext = "To: #{notifications}" unless notifications == ""
+        msg.content.pretext = "To: #{notifications}" if notifications.length > 0
 
         robot.emit 'slack-attachment', msg
         res.end "OK"
