@@ -78,6 +78,8 @@ module.exports = (robot) ->
         when 1
           label = "課題追加"
           color = query.warning_color || config.warning_color
+          # TODO: 課題を作成したユーザーが担当の場合はお知らせに追加されない
+          # TODO: そのため、担当が決まっているのも関わらず「未設定」となってしまう
           assigner = (body.notifications.filter (n) -> n.reason == 1)[0]
           fields.push(
             {
