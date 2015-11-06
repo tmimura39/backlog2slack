@@ -84,7 +84,7 @@ module.exports = (robot) ->
           fields.push(
             {
               title: "担当"
-              value: decorate(assigner?.name)
+              value: decorate(assigner?.user?.name)
             },
             {
               title: "詳細"
