@@ -94,7 +94,6 @@ module.exports = (robot) ->
         when 2 then label = "課題更新"
         when 3 then label = "コメント追加"
         when 17 then label = "お知らせに追加"
-        # その他未対応(Wikiとか)
 
       if label?
         # 課題の変更点
@@ -162,7 +161,18 @@ module.exports = (robot) ->
         robot.emit 'slack-attachment', msg
         res.end "OK"
       else
-        robot.messageRoom destination, "[#{body.project.name}]\n何か動きがありました\n"
+        # 課題以外は簡易的な通知のみ
+        switch body.type
+          when 5, 6, 7 then text = "Wiki"
+          when 8, 9, 10 then text = "共有フォルダ"
+          when 11 then text = "Subversion"
+          when 12, 13 then text = "Git"
+          when 14 then text = "複数課題"
+          when 15, 16 then text = "プロジェクト全体"
+          when 18, 19, 20 then text = "プルリクエスト"
+          else text = "その他"
+
+        robot.messageRoom destination, "[#{body.project.name}]\n#{text}に動きがありました\n"
 
         res.end "OK"
 
