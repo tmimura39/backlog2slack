@@ -148,7 +148,7 @@ module.exports = (robot) ->
       if label?
         msg =
           channel: destination
-          username: "#{label}: [#{body.project.name}]"
+          username: "#{label}: [#{body.project.name}] by #{body.createdUser.name}"
           icon_url: "https://raw.githubusercontent.com/mito5525/backlog2slack/master/icon/backlog.png"
           content:
             fallback: "#{label}: [#{body.content.summary}] by #{body.createdUser.name}"
