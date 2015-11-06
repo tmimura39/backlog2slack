@@ -1,6 +1,6 @@
 {
   "name": "backlog2slack",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "hubot scripts: backlog notification to slack",
   "main": "index.coffee",
   "scripts": {

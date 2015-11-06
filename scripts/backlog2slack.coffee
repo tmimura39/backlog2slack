@@ -94,58 +94,58 @@ module.exports = (robot) ->
         when 2 then label = "課題更新"
         when 3 then label = "コメント追加"
         when 17 then label = "お知らせに追加"
-
         # その他未対応(Wikiとか)
 
-      # 課題の変更点
-      if body.content.changes?
-        for change in body.content.changes
-          title = null
-          value = "#{decorate(change.old_value)} => #{decorate(change.new_value)}"
-
-          switch change.field
-            when "description" then title = "詳細変更"
-            when "assigner" then title = "担当者変更"
-            when "attachment" then title = "添付ファイル変更"
-            when "milestone" then title = "マイルストーン変更"
-            when "limitDate" then title = "期限日変更"
-            when "status"
-              title = "ステータス変更"
-              value = "#{decorate(status[change.old_value])} => #{decorate(status[change.new_value])}"
-            when "resolution"
-              title = "完了理由変更"
-              value = "#{decorate(resolution[change.old_value])} => #{decorate(resolution[change.new_value])}"
-
-          if title?
-            fields.push(
-              title: title
-              value: value
-              short: true
-            )
-
-      # 添付ファイル
-      if body.content.attachments?
-        value = ""
-        for attachment in body.content.attachments
-          url = "#{backlogUrl}downloadAttachment/#{attachment.id}/#{attachment.name}"
-          value += "\t- #{url}\n"
-
-        fields.push(
-          title: "添付ファイル"
-          value: value
-        )
-
-      # コメント
-      if body.content.comment? && body.content.comment.content.trim() != ""
-        fields.push(
-          title: "コメント"
-          value: "#{body.content.comment.content}"
-        )
-
-      # 通知対象者取得
-      notifications = body.notifications.map (n) -> " #{n.user.name}"
-
       if label?
+        # 課題の変更点
+        if body.content.changes?
+          for change in body.content.changes
+            title = null
+            value = "#{decorate(change.old_value)} => #{decorate(change.new_value)}"
+
+            switch change.field
+              when "description" then title = "詳細変更"
+              when "assigner" then title = "担当者変更"
+              when "attachment" then title = "添付ファイル変更"
+              when "milestone" then title = "マイルストーン変更"
+              when "limitDate" then title = "期限日変更"
+              when "status"
+                title = "ステータス変更"
+                value = "#{decorate(status[change.old_value])} => #{decorate(status[change.new_value])}"
+              when "resolution"
+                title = "完了理由変更"
+                value = "#{decorate(resolution[change.old_value])} => #{decorate(resolution[change.new_value])}"
+
+            if title?
+              fields.push(
+                title: title
+                value: value
+                short: true
+              )
+
+        # 添付ファイル
+        if body.content.attachments?
+          value = ""
+          for attachment in body.content.attachments
+            url = "#{backlogUrl}downloadAttachment/#{attachment.id}/#{attachment.name}"
+            value += "\t- #{url}\n"
+
+          fields.push(
+            title: "添付ファイル"
+            value: value
+          )
+
+        # コメント
+        if body.content.comment? && body.content.comment.content.trim() != ""
+          fields.push(
+            title: "コメント"
+            value: "#{body.content.comment.content}"
+          )
+
+        # 通知対象者取得
+        notifications = body.notifications.map (n) -> " #{n.user.name}"
+
+        # メッセージ整形
         msg =
           channel: destination
           username: "#{label}: [#{body.project.name}] by #{body.createdUser.name}"
