@@ -36,10 +36,10 @@ module.exports = (body = {}, query = {}) ->
         when "limitDate" then title = "期限日変更"
         when "status"
           title = "ステータス変更"
-          value = "#{config.decorate(status[change.old_value])} => #{config.decorate(status[change.new_value])}"
+          value = "#{config.decorate(config.status[change.old_value])} => #{config.decorate(config.status[change.new_value])}"
         when "resolution"
           title = "完了理由変更"
-          value = "#{config.decorate(resolution[change.old_value])} => #{config.decorate(resolution[change.new_value])}"
+          value = "#{config.decorate(config.resolution[change.old_value])} => #{config.decorate(config.resolution[change.new_value])}"
 
       if title?
         fields.push(
