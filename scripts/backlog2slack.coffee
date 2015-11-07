@@ -43,6 +43,9 @@ module.exports = (robot) ->
         when 1, 2, 3, 4, 17
           issue = require './issue'
           msg = issue(body, query)
+        when 11
+          svn = require './svn'
+          msg = svn(body, query)
         else
           simple = require './simple'
           msg = simple(body, query)
