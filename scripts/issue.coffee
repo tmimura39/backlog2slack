@@ -53,11 +53,11 @@ module.exports = (body = {}, query = {}) ->
     value = ""
     for attachment in body.content.attachments
       url = "#{config.setting.backlog_url}downloadAttachment/#{attachment.id}/#{attachment.name}"
-      value += "\t- #{url}\n"
-      fields.push(
-        title: "添付ファイル"
-        value: value
-      )
+      value += "- #{url}\n"
+    fields.push(
+      title: "添付ファイル"
+      value: value
+    )
 
   # コメント
   if body.content?.comment? && body.content.comment.content?.trim() != ""
