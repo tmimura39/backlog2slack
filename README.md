@@ -1,6 +1,6 @@
 # Backlog Notification To Slack
 
-このHubotは、Backlogの更新(課題関係のみ)をSlackに通知させます
+このHubotは、Backlogの更新をSlackに通知させます
 
 ## 通知対象
 - 課題作成
@@ -11,6 +11,11 @@
     + ファイル追加
     + ...etc
 - お知らせ追加
+- Wiki
+    + 作成
+    + 更新
+    + 削除
+- Subversion
 
 ## 導入方法
 
