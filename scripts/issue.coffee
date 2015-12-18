@@ -84,6 +84,3 @@ module.exports = (body = {}, query = {}) ->
       title: "[#{body.project?.projectKey}-#{body.content?.key_id}] #{body.content?.summary}"
       title_link: "#{config.setting.backlog_url}view/#{body.project?.projectKey}-#{body.content?.key_id}"
       fields: fields
-
-  msg.content.pretext = "To: #{notifications}" if notifications?.length > 0
-  msg
