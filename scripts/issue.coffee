@@ -5,6 +5,14 @@ module.exports = (body = {}, query = {}) ->
   fields = []
   color = query?.good_color || config.setting.good_color
 
+  # 通知対象者
+  notifications = body.notifications?.map (n) -> " #{n.user.name}"
+  if notifications?.length > 0
+    fields.push(
+      title: "To"
+      value: "#{notifications}"
+    )
+
   # 課題追加
   if body.type == 1
     color = query?.warning_color || config.setting.warning_color
@@ -63,11 +71,8 @@ module.exports = (body = {}, query = {}) ->
   if body.content?.comment? && body.content.comment.content?.trim() != ""
     fields.push(
       title: "コメント"
-      value: "#{body.content.comment.content}"
+      value: body.content.comment.content
     )
-
-  # 通知対象者取得
-  notifications = body.notifications?.map (n) -> " #{n.user.name}"
 
   # メッセージ整形
   msg =
