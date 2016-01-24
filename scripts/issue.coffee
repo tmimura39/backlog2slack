@@ -35,6 +35,7 @@ module.exports = (body = {}, query = {}) ->
     for change in body.content.changes
       title = null
       value = "#{config.decorate(change.old_value)} → #{config.decorate(change.new_value)}"
+      short = true
 
       switch change.field
         when "assigner" then title = "担当者変更"
@@ -44,6 +45,7 @@ module.exports = (body = {}, query = {}) ->
         when "description"
           title = "詳細変更"
           value = "#{config.decorate(change.old_value)}\n ↓ \n#{config.decorate(change.new_value)}"
+          short = false
         when "status"
           title = "ステータス変更"
           value = "#{config.decorate(config.status[change.old_value])} → #{config.decorate(config.status[change.new_value])}"
@@ -55,7 +57,7 @@ module.exports = (body = {}, query = {}) ->
         fields.push(
           title: title
           value: value
-          short: true
+          short: short
         )
 
   # 添付ファイル
