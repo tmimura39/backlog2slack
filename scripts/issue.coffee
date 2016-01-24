@@ -34,20 +34,22 @@ module.exports = (body = {}, query = {}) ->
   if body.content?.changes?
     for change in body.content.changes
       title = null
-      value = "#{config.decorate(change.old_value)} => #{config.decorate(change.new_value)}"
+      value = "#{config.decorate(change.old_value)} → #{config.decorate(change.new_value)}"
 
       switch change.field
-        when "description" then title = "詳細変更"
         when "assigner" then title = "担当者変更"
         when "attachment" then title = "添付ファイル変更"
         when "milestone" then title = "マイルストーン変更"
         when "limitDate" then title = "期限日変更"
+        when "description"
+          title = "詳細変更"
+          value = "#{config.decorate(change.old_value)}\n ↓ \n#{config.decorate(change.new_value)}"
         when "status"
           title = "ステータス変更"
-          value = "#{config.decorate(config.status[change.old_value])} => #{config.decorate(config.status[change.new_value])}"
+          value = "#{config.decorate(config.status[change.old_value])} → #{config.decorate(config.status[change.new_value])}"
         when "resolution"
           title = "完了理由変更"
-          value = "#{config.decorate(config.resolution[change.old_value])} => #{config.decorate(config.resolution[change.new_value])}"
+          value = "#{config.decorate(config.resolution[change.old_value])} → #{config.decorate(config.resolution[change.new_value])}"
 
       if title?
         fields.push(
