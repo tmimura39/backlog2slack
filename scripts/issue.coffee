@@ -80,7 +80,7 @@ module.exports = (body = {}, query = {}) ->
 
   # メッセージ整形
   msg =
-    username: "#{config.type[body.type]}: [#{body.project?.name}] by #{body.createdUser?.name}"
+    username: "#{config.type[body.type]}: by #{body.createdUser?.name}"
     icon_url: "https://raw.githubusercontent.com/mito5525/backlog2slack/master/icon/backlog.png"
     content:
       fallback: "#{config.type[body.type]}: [#{body.content?.summary}] by #{body.createdUser?.name}"
