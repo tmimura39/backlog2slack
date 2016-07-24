@@ -16,6 +16,7 @@
     + 更新
     + 削除
 - Subversion
+- Git (PR)
 
 ## 導入方法
 
