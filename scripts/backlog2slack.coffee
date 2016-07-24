@@ -49,6 +49,9 @@ module.exports = (robot) ->
         when 11
           svn = require './svn'
           msg = svn(body, query)
+        when 12, 13
+          git = require './git'
+          msg = git(body, query)
         else
           simple = require './simple'
           msg = simple(body, query)
