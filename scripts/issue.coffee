@@ -48,7 +48,7 @@ module.exports = (body = {}, query = {}) ->
           short = false
         when "status"
           title = "ステータス変更"
-          value = "#{config.decorate(config.status[change.old_value])} → #{config.decorate(config.status[change.new_value])}"
+          value = "#{config.decorate(config.issue_status[change.old_value])} → #{config.decorate(config.issue_status[change.new_value])}"
         when "resolution"
           title = "完了理由変更"
           value = "#{config.decorate(config.resolution[change.old_value])} → #{config.decorate(config.resolution[change.new_value])}"

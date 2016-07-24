@@ -52,6 +52,9 @@ module.exports = (robot) ->
         when 12, 13
           git = require './git'
           msg = git(body, query)
+        when 18, 19, 20
+          pr = require './pr'
+          msg = pr(body, query)
         else
           simple = require './simple'
           msg = simple(body, query)
