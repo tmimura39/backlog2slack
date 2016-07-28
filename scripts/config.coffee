@@ -2,7 +2,7 @@ module.exports =
   # 環境設定
   setting: {
     destination: process.env.HUBOT_BACKLOG2SLACK_DESTINATION
-    backlog_url: "https://#{process.env.HUBOT_BACKLOG2SLACK_SPACE}.backlog.jp/"
+    space: process.env.HUBOT_BACKLOG2SLACK_SPACE
     good_color: process.env.HUBOT_BACKLOG2SLACK_GOOD_COLOR || "good"
     warning_color: process.env.HUBOT_BACKLOG2SLACK_WARNING_COLOR || "warning"
     danger_color: process.env.HUBOT_BACKLOG2SLACK_DANGER_COLOR || "danger"

@@ -4,6 +4,8 @@ module.exports = (body = {}, query = {}) ->
 
   fields = []
   color = query?.good_color || config.setting.good_color
+  space = query?.space || config.setting.space
+  backlog_url = "https://#{space}.backlog.jp/"
 
   # 通知対象者
   notifications = body.notifications?.map (n) -> " #{n.user.name}"
@@ -64,7 +66,7 @@ module.exports = (body = {}, query = {}) ->
   if body.content?.attachments?
     value = ""
     for attachment in body.content.attachments
-      url = "#{config.setting.backlog_url}downloadAttachment/#{attachment.id}/#{attachment.name}"
+      url = "#{backlog_url}downloadAttachment/#{attachment.id}/#{attachment.name}"
       value += "- #{url}\n"
     fields.push(
       title: "添付ファイル"
@@ -86,5 +88,5 @@ module.exports = (body = {}, query = {}) ->
       fallback: "#{config.type[body.type]}: [#{body.content?.summary}] by #{body.createdUser?.name}"
       color: color
       title: "[#{body.project?.projectKey}-#{body.content?.key_id}] #{body.content?.summary}"
-      title_link: "#{config.setting.backlog_url}view/#{body.project?.projectKey}-#{body.content?.key_id}"
+      title_link: "#{backlog_url}view/#{body.project?.projectKey}-#{body.content?.key_id}"
       fields: fields
