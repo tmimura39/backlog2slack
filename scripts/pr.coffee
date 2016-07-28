@@ -4,7 +4,9 @@ module.exports = (body = {}, query = {}) ->
 
   fields = []
   color = query?.good_color || config.setting.good_color
-  title_link = "#{config.setting.backlog_url}git/#{body.project?.projectKey}/#{body.content?.repository.name}/pullRequests/#{body.content?.number}"
+  space = query?.space || config.setting.space
+  backlog_url = "https://#{space}.backlog.jp/"
+  title_link = "#{backlog_url}git/#{body.project?.projectKey}/#{body.content?.repository.name}/pullRequests/#{body.content?.number}"
 
 
   # 通知対象者

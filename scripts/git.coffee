@@ -4,6 +4,8 @@ module.exports = (body = {}, query = {}) ->
 
   fields = []
   color = query?.good_color || config.setting.good_color
+  space = query?.space || config.setting.space
+  backlog_url = "https://#{space}.backlog.jp/"
 
   # revision
   if body.content?.revision_type
@@ -15,7 +17,7 @@ module.exports = (body = {}, query = {}) ->
   # commit
   if body.content?.revisions?
     for revision in body.content.revisions
-      url = "#{config.setting.backlog_url}git/#{body.project?.projectKey}/#{body.content?.repository.name}/commit/#{revision.rev}"
+      url = "#{backlog_url}git/#{body.project?.projectKey}/#{body.content?.repository.name}/commit/#{revision.rev}"
       fields.push(
         title: "rev"
         value: "#{url}"
@@ -33,5 +35,5 @@ module.exports = (body = {}, query = {}) ->
       fallback: "#{config.type[body.type]}: by #{body.createdUser?.name}"
       color: color
       title: "リポジトリ: #{body.content?.repository.name}"
-      title_link: "#{config.setting.backlog_url}git/#{body.project?.projectKey}/#{body.content?.repository.name}"
+      title_link: "#{backlog_url}git/#{body.project?.projectKey}/#{body.content?.repository.name}"
       fields: fields
